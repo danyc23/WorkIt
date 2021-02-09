@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE `company` (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `companyName` VARCHAR(191) NOT NULL,
     `country` VARCHAR(191) NOT NULL,
     `address` VARCHAR(191) NOT NULL,
@@ -15,26 +15,26 @@ UNIQUE INDEX `company.email_unique`(`email`),
 
 -- CreateTable
 CREATE TABLE `post` (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `location` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NOT NULL,
     `date` VARCHAR(191) NOT NULL,
-    `companyId` INT,
+    `companyId` INTEGER,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `applicant` (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `lastname` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
-    `salary` INT NOT NULL,
+    `salary` INTEGER NOT NULL,
     `details` VARCHAR(191) NOT NULL,
-    `resume` VARCHAR(191) NOT NULL,
-    `postId` INT,
+    `resume` LONGBLOB NOT NULL,
+    `postId` INTEGER,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
