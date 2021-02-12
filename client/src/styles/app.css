@@ -1,1 +1,43 @@
-/* No CSS *//*# sourceMappingURL=app.css.map */
+.navbar-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: auto 1rem;
+}
+
+.logo-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto 1rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.search-input {
+  width: 100%;
+  height: 1.5rem;
+}
+
+.search-button {
+  background-color: #20639b;
+  width: 6rem;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+/*# sourceMappingURL=app.css.map */

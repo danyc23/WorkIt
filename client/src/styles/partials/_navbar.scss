@@ -1,0 +1,14 @@
+.navbar {
+  &-links {
+    display: flex;
+    justify-content: space-between;
+    margin: auto 1rem;
+  }
+}
+
+.logo {
+  &-container {
+    display: flex;
+    justify-content: center;
+  }
+}
