@@ -1,31 +1,49 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// getting all posts
+const allPosts = async (req, res) => {
+  const data = prisma.post
+    .findMany()
+    .then((posts) => {
+      res.status(200).json(posts);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
 const newPost = async (req, res) => {
   const { title, location, description, date } = req.body;
-  const { companyId } = req.params;
+  const companyId = req.params.id;
   if (!title || !location || !description || !date) {
     console.log(req.body);
     res.status(400).json({ msg: "Please insert all fields" });
   } else {
-    await prisma.post
-      .create({
-        data: {
-          companyId: companyId,
-          title: title,
-          location: location,
-          description: description,
-          date: date,
-        },
-      })
-      .then((newPost) => {
-        console.log(newPost);
-        res.status(201).json(newPost);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+    let foundCompany = await prisma.company.findUnique({
+      where: { id: Number(req.params.id) },
+    });
+    if (foundCompany) {
+      await prisma.post
+        .create({
+          data: {
+            companyId: Number(companyId),
+            title: title,
+            location: location,
+            description: description,
+            date: date,
+          },
+        })
+        .then((newPost) => {
+          res.status(201).json(newPost);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else {
+      res.status(400).json({ msg: "The user doesn't exist" });
+    }
   }
 };
 
-module.exports = { newPost };
+module.exports = { newPost, allPosts };
