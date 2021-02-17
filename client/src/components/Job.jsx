@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Job(props) {
   let { title } = props;
@@ -6,7 +7,7 @@ export default function Job(props) {
   let { description } = props;
   let { date } = props;
   return (
-    <div>
+    <div className="job-container">
       <h2 className="job-title">{title}</h2>
       <p className="job-location">{location}</p>
       <p className="job-description">{description}</p>

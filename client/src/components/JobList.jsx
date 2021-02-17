@@ -4,7 +4,7 @@ import Job from "./Job";
 export default function JobList(props) {
   let { jobs } = props;
   return (
-    <ul>
+    <ul className="job-list">
       {jobs &&
         jobs.map((job) => {
           return (
