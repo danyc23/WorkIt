@@ -4,6 +4,7 @@ import "./styles/app.css";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import JobList from "./components/JobList";
+
 class App extends React.Component {
   state = {
     allJobs: [],
@@ -27,11 +28,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <Navbar />
         <SearchBar />
         <JobList jobs={this.state.allJobs} />
-      </div>
+      </>
     );
   }
 }
