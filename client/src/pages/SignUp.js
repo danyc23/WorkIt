@@ -44,7 +44,9 @@ export default class SignUp extends React.Component {
   };
 
   render() {
-    return (
+    return this.state.signedUp ? (
+      <Redirect to="/login" />
+    ) : (
       <section className="register">
         <div className="register-main__container">
           <div className="register-border">
