@@ -1,61 +1,101 @@
-import { useState, useRef } from "react";
-import { Card, Form, Button, Alert } from "react-bootstrap";
-import { AuthProvider, useAuth } from "../contexts/AuthContext";
-import { Container } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { Redirect, Link } from "react-router-dom";
+const axios = require("axios");
 
-export default function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
-
-  async function handleSumbit(e) {
+export default class Login extends React.Component {
+  state = {
+    email: "",
+    password: "",
+    loggedIn: false,
+  };
+  changeHandler = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+  submitHandler = (e) => {
     e.preventDefault();
-    try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/dashboard");
-    } catch {
-      setError("Failed to log in");
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+    if (!this.state.email || !this.state.password) {
+      alert("Type password and email ");
+    } else {
+      axios
+        .post("http://localhost:5000/company/login", {
+          email: this.state.email,
+          password: this.state.password,
+        })
+        .then((res) => {
+          console.log(res);
+          sessionStorage.authToken = res.data.token;
+          sessionStorage.userId = res.data.id;
+          this.setState({ loggedIn: true });
+        });
     }
-    setLoading(false);
-  }
-  return (
-    <>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Log In</h2>
-              {error && <Alert variant="danger">{error}</Alert>}
-              <Form onSubmit={handleSumbit}>
-                <Form.Group id="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" ref={emailRef} required />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
-                </Form.Group>
-                <Button disabled={loading} type="submit" className="w-100">
-                  Log In
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
+  };
 
-          <div className="w-100 text-center mt-2">
-            Need an account? <Link to="/signup">Sign Up</Link>
+  render() {
+    return sessionStorage.getItem("authToken") ? (
+      <Redirect to="/dashboard" />
+    ) : (
+      <section className="login">
+        <div className="login-main__container">
+          <div className="login-border">
+            <div className="login-title__container">
+              <h1 className="login-title">Login</h1>
+            </div>
+            <form className="login-form" onSubmit={this.submitHandler}>
+              <div className="login-container">
+                <label className="login-label" for="email">
+                  Email
+                </label>
+                <input
+                  onChange={this.changeHandler}
+                  className="login-input"
+                  type="text"
+                  name="email"
+                  id="email"
+                />
+              </div>
+              <div className="login-container">
+                <label className="login-label" for="password">
+                  Password
+                </label>
+                <input
+                  onChange={this.changeHandler}
+                  className="login-input"
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+              </div>
+              <div className="login-container login-container--last">
+                <div>
+                  <button className="login-btn" type="submit">
+                    Log in
+                  </button>
+                  <input type="checkbox" name="remember" />
+                  <label className="login-checkbox__text">Remember me</label>
+                </div>
+                <div className="login-container__remember">
+                  <div>
+                    <Link to="/">
+                      <button className="login-container__remember-btn">
+                        Cancel
+                      </button>
+                    </Link>
+                  </div>
+
+                  <Link className="nav-link" to="/signup">
+                    <p className="login-register__text">Register</p>
+                  </Link>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </Container>
-    </>
-  );
+      </section>
+    );
+  }
 }

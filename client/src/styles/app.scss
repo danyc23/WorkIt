@@ -1,6 +1,8 @@
+@import "./partials/mixins";
 @import "./partials/navbar";
 @import "./partials/search";
 @import "./partials/job";
+@import "./partials/login";
 * {
   margin: 0;
   padding: 0;

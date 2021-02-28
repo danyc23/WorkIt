@@ -1,27 +1,16 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
-import { useAuth, logout } from "../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
-  const [error, setError] = useState("");
-  const { logout } = useAuth();
-  const history = useHistory();
-
-  async function handleLogout() {
-    try {
-      await logout();
-      history.push("/");
-    } catch {
-      setError("Failed to logout");
-    }
+  function logout() {
+    sessionStorage.removeItem("authToken");
   }
-
   return (
     <div>
-      <Button variant="link" onClick={handleLogout}>
-        Logout
-      </Button>
+      <h1>Profile Page</h1>
+      <Link to="/">
+        <p onClick={logout}>Log out</p>
+      </Link>
     </div>
   );
 }

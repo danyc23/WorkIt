@@ -1,3 +1,5 @@
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
@@ -9,7 +11,6 @@ const newCompany = async (req, res) => {
     res.status(400).json({ msg: "Please insert all fields" });
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("creating user");
     await prisma.company
       .create({
         data: {
@@ -44,7 +45,39 @@ const getCompanyWithPost = async (req, res) => {
     });
 };
 
+const logInCompany = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    res.status(400).json({ msg: "Please insert email and password" });
+  } else {
+    await prisma.company
+      .findUnique({
+        where: { email: req.body.email },
+        select: { password: true, id: true },
+      })
+      .then((user) => {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+          if (err) {
+            throw err;
+          }
+          if (result) {
+            let token = jwt.sign(
+              { [req.body.email]: req.body.email },
+              process.env.ACCESS_TOKEN_SECRET
+            );
+            res.status(200).json({ token, id: user.id });
+          } else {
+            res.status(404).json({ error: "Incorrect password or email" });
+          }
+        });
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  }
+};
+
 module.exports = {
   newCompany,
   getCompanyWithPost,
+  logInCompany,
 };

@@ -1,0 +1,112 @@
+@import "./variables";
+.login {
+  &-main__container {
+    @include desktop {
+      display: flex;
+      justify-content: center;
+      margin-top: 5rem;
+    }
+  }
+  &-border {
+    @include desktop {
+      box-shadow: 3px 3px 3px 3px #aaaaaa;
+      display: flex;
+      flex-direction: column;
+      width: 500px;
+      align-items: center;
+    }
+  }
+  &-container {
+    margin: 1rem;
+    &__remember {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      &-btn {
+        background-color: $blue;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 3px;
+        @include desktop {
+          width: 100px;
+          @include tablet-paragraph;
+        }
+      }
+    }
+    &--last {
+      @include desktop {
+        margin-bottom: 5rem;
+      }
+    }
+  }
+  &-input {
+    width: 100%;
+    height: 2rem;
+    @include desktop {
+      width: 400px;
+    }
+  }
+  &-title {
+    color: $blue;
+    margin-left: 1rem;
+    @include desktop {
+      @include tablet-header;
+      margin-top: 4rem;
+      color: $blue;
+      margin-left: 0;
+    }
+    &__container {
+      @include desktop {
+        display: flex;
+        justify-content: center;
+        margin-left: 0;
+      }
+    }
+  }
+  &-label {
+    display: block;
+    color: $blue;
+    margin-bottom: 0.2rem;
+    @include desktop {
+      @include tablet-sub-header;
+    }
+  }
+  &-btn {
+    width: 100%;
+    background-color: $blue;
+    color: white;
+    height: 2rem;
+    border: none;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    @include desktop {
+      width: 400px;
+      display: block;
+      @include tablet-sub-header;
+    }
+  }
+  &-checkbox {
+    &__text {
+      margin-left: 0.3rem;
+      color: $blue;
+      @include desktop {
+        @include tablet-paragraph;
+      }
+    }
+  }
+  &-form {
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  &-register__text {
+    color: $blue;
+    @include desktop {
+      @include tablet-sub-header;
+    }
+  }
+}
