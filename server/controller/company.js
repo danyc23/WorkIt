@@ -32,17 +32,14 @@ const newCompany = async (req, res) => {
 };
 // Get a company with all its information
 const getCompanyWithPost = async (req, res) => {
-  const data = await prisma.company
-    .findUnique({
-      where: { id: Number(req.params.id) },
-      include: { posts: true }, //still need to check
-    })
-    .then((company) => {
-      res.status(200).json(company);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+  const data = await prisma.company.findUnique({
+    where: { id: parseInt(req.params.id) },
+    include: { posts: true },
+  });
+  if (!data) {
+    res.sendStatus(500);
+  }
+  res.status(200).json(data);
 };
 
 const logInCompany = async (req, res) => {

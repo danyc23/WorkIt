@@ -10,6 +10,7 @@ export default function JobList(props) {
           return (
             <Job
               key={job.id}
+              id={job.id}
               title={job.title}
               companyId={job.companyId}
               date={job.date}

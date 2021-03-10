@@ -13,6 +13,20 @@ const allPosts = async (req, res) => {
     });
 };
 
+const getPost = async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    res.status(401).json({ msg: "No job with this id" });
+  }
+  const data = await prisma.post.findUnique({
+    where: { id: Number(id) },
+  });
+  if (!data) {
+    res.sendStatus(500).json({ msg: `No Job matching this id:${id}` });
+  }
+  res.status(200).json(data);
+};
+
 const newPost = async (req, res) => {
   const { title, location, description, date } = req.body;
   const companyId = req.params.id;
@@ -46,4 +60,4 @@ const newPost = async (req, res) => {
   }
 };
 
-module.exports = { newPost, allPosts };
+module.exports = { newPost, allPosts, getPost };

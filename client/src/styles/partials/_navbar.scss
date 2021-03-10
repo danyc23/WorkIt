@@ -2,7 +2,7 @@
   &-links {
     display: flex;
     justify-content: space-between;
-    margin: auto 1rem;
+    margin: 1rem;
   }
 }
 
@@ -10,5 +10,7 @@
   &-container {
     display: flex;
     justify-content: center;
+    margin: 0 1rem;
+    padding: 1rem 0px;
   }
 }
