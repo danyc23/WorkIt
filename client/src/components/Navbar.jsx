@@ -17,6 +17,9 @@ export default function Navbar() {
         <Link to="/contact">
           <p className="navbar-text">Contact Us</p>
         </Link>
+        <Link to="/login">
+          <p className="navbar-text">Login</p>
+        </Link>
       </section>
     </nav>
   );

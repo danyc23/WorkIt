@@ -7,6 +7,7 @@ export default class Login extends React.Component {
     email: "",
     password: "",
     loggedIn: false,
+    newId: "",
   };
   changeHandler = (e) => {
     this.setState({
@@ -30,14 +31,14 @@ export default class Login extends React.Component {
           console.log(res);
           sessionStorage.authToken = res.data.token;
           sessionStorage.userId = res.data.id;
-          this.setState({ loggedIn: true });
+          this.setState({ loggedIn: true, newId: res.data.id });
         });
     }
   };
 
   render() {
     return sessionStorage.getItem("authToken") ? (
-      <Redirect to="/dashboard" />
+      <Redirect to={`/dashboard/${this.state.newId}`} />
     ) : (
       <section className="login">
         <div className="login-main__container">
