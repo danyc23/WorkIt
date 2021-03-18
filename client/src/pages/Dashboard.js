@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import JobInDash from "../components/JobsInDash";
+import JobList from "../components/JobList";
 
 class Dashboard extends React.Component {
   logout = () => {
@@ -11,6 +13,24 @@ class Dashboard extends React.Component {
     date: "",
     location: "",
     description: "",
+    posts: [],
+  };
+  componentDidMount = () => {
+    this.getJobs(sessionStorage.getItem("userId"));
+  };
+  getJobs = (id) => {
+    axios
+      .get(`http://localhost:5000/company/${id}`)
+      .then((response) => {
+        let companyPost = response.data.posts;
+        console.log(companyPost);
+        this.setState({
+          posts: companyPost,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   handleChange = (e) => {
@@ -100,7 +120,9 @@ class Dashboard extends React.Component {
             </button>
           </form>
         </section>
-        <section></section>
+        <section>
+          <JobList jobs={this.state.posts} />
+        </section>
       </div>
     );
   }
