@@ -1,14 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import DescInfo from "../components/DescInfo";
 
 class JobDesc extends React.Component {
   state = {
-    date: "",
-    description: "",
-    id: 0,
-    location: "",
-    title: "",
+    allData: [],
   };
 
   componentDidMount = () => {
@@ -19,13 +16,8 @@ class JobDesc extends React.Component {
     axios
       .get(`http://localhost:5000/post/${id}`)
       .then((res) => {
-        let { date, id, location, title, description } = res.data;
         this.setState({
-          date: date,
-          description: description,
-          id: id,
-          location: location,
-          title: title,
+          allData: res.data,
         });
       })
       .catch((err) => {
@@ -35,11 +27,8 @@ class JobDesc extends React.Component {
   render() {
     return (
       <div>
-        <h2>Title</h2> <p>{this.state.title}</p>
-        <h2>Location</h2> <p>{this.state.location}</p>
-        <h2>Date</h2> <p>{this.state.date}</p>
-        <h2>Description</h2> <p>{this.state.description}</p>
-        <button>Apply</button>
+        <DescInfo info={this.state.allData} />
+        {!sessionStorage.getItem("authToken") && <button>Apply</button>}
       </div>
     );
   }

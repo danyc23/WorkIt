@@ -20,6 +20,7 @@ const getPost = async (req, res) => {
   }
   const data = await prisma.post.findUnique({
     where: { id: Number(id) },
+    include: { applicant: true },
   });
   if (!data) {
     res.sendStatus(500).json({ msg: `No Job matching this id:${id}` });
