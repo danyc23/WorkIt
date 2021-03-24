@@ -39,6 +39,7 @@ model applicant {
   name     String
   lastname String
   email    String
+  phone    Int
   salary   Int
   details  String
   resume   Bytes
