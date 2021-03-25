@@ -1,0 +1,53 @@
+@import "./variables";
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  &-main {
+    position: fixed;
+    background: white;
+    width: 300px;
+    height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+  }
+  &-title {
+    color: $blue;
+    margin: 1rem;
+    &__section {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &-label {
+    display: block;
+    color: $blue;
+    margin: 0.5rem 1rem;
+  }
+  &-input {
+    margin: 0 1rem;
+    display: block;
+    &__textarea {
+      height: 75px;
+    }
+  }
+  &-btn {
+    background-color: $blue;
+    color: white;
+    margin: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: none;
+    border-radius: 3px;
+    &__cancel {
+      margin-top: 0;
+    }
+  }
+}

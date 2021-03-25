@@ -1,11 +1,14 @@
 import React from "react";
 import axios from "axios";
+import Modal from "react-modal";
 import { Redirect } from "react-router-dom";
 import DescInfo from "../components/DescInfo";
+import ApplicationModal from "../components/ApplicationModal";
 
 class JobDesc extends React.Component {
   state = {
     allData: [],
+    modalIsOpen: false,
   };
 
   componentDidMount = () => {
@@ -28,7 +31,18 @@ class JobDesc extends React.Component {
     return (
       <div>
         <DescInfo info={this.state.allData} />
-        {!sessionStorage.getItem("authToken") && <button>Apply</button>}
+        {!sessionStorage.getItem("authToken") && (
+          <button
+            onClick={(e) =>
+              this.setState({ modalIsOpen: !this.state.modalIsOpen })
+            }
+          >
+            Apply
+          </button>
+        )}
+        <Modal isOpen={this.state.modalIsOpen}>
+          <ApplicationModal />
+        </Modal>
       </div>
     );
   }
