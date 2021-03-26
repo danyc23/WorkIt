@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { Redirect } from "react-router-dom";
 import DescInfo from "../components/DescInfo";
 import ApplicationModal from "../components/ApplicationModal";
-
+Modal.setAppElement("#root");
 class JobDesc extends React.Component {
   state = {
     allData: [],
@@ -40,8 +40,14 @@ class JobDesc extends React.Component {
             Apply
           </button>
         )}
-        <Modal isOpen={this.state.modalIsOpen}>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={() => this.setState({ modalIsOpen: false })}
+        >
           <ApplicationModal />
+          <button onClick={() => this.setState({ modalIsOpen: false })}>
+            Close
+          </button>
         </Modal>
       </div>
     );
