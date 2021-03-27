@@ -1,52 +1,83 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function ApplicationModal() {
+export default function ApplicationModal(props) {
   const [name, setName] = useState();
-  const [lastName, setLastName] = useState();
+  const [lastname, setLastName] = useState();
   const [email, setEmail] = useState();
   const [salary, setSalary] = useState();
   const [phone, setPhone] = useState();
+  const [details, setDetails] = useState();
   const [resume, setResume] = useState();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //working on this
+    //new Application to be included
+    const data = new FormData();
+    data.append("name", name);
+    data.append("lastName", lastname);
+    data.append("email", email);
+    data.append("salary", salary);
+    data.append("details", details);
+    data.append("phone", phone);
+    data.append("resume", resume);
+
+    newApplication(data);
   };
 
+  const newApplication = (data) => {
+    console.log(data);
+    console.log(props.props.match.params.id);
+    const { id } = props.props.match.params;
+    //this id may be needed to converted to number
+    axios
+      .post(`http://localhost:5000/application/${id}`, data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log("this is the error --->", err);
+      });
+  };
+  // http://localhost:5000/application/${id}
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div>
         <div>
-          <label for="name">First Name</label>
+          <label htmlFor="name">First Name</label>
           <input onChange={(e) => setName(e.target.value)} type="text" />
         </div>
         <div>
-          <label for="lastName">Last Name</label>
+          <label htmlFor="lastName">Last Name</label>
           <input onChange={(e) => setLastName(e.target.value)} type="text" />
         </div>
         <div>
-          <label for="email">Email</label>
-          <input onChange={(e) => setLastName(e.target.value)} type="email" />
+          <label htmlFor="email">Email</label>
+          <input onChange={(e) => setEmail(e.target.value)} type="email" />
         </div>
         <div>
-          <label for="salary">Salary</label>
+          <label htmlFor="salary">Salary</label>
           <input onChange={(e) => setSalary(e.target.value)} type="number" />
         </div>
         <div>
-          <label for="phone">phone Number</label>
+          <label htmlFor="phone">phone Number</label>
           <input onChange={(e) => setPhone(e.target.value)} type="number" />
         </div>
         <div>
-          <label for="resume">Resume</label>
+          <label htmlFor="details">Details</label>
+          <textarea onChange={(e) => setDetails(e.target.value)} type="text" />
+        </div>
+        <div>
+          <label htmlFor="resume">Resume</label>
           <input
-            onChange={(e) => setResume(e.target.value)}
+            onChange={(e) => setResume(e.target.files[0])}
             name="resume"
             type="file"
+            accept=".pdf"
           />
         </div>
         <div>
-          <button>Submit</button>
+          <button type="submit">Submit</button>
         </div>
       </div>
     </form>

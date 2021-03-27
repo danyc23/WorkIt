@@ -44,7 +44,7 @@ class JobDesc extends React.Component {
           isOpen={this.state.modalIsOpen}
           onRequestClose={() => this.setState({ modalIsOpen: false })}
         >
-          <ApplicationModal />
+          <ApplicationModal props={this.props} />
           <button onClick={() => this.setState({ modalIsOpen: false })}>
             Close
           </button>
