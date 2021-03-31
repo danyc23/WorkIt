@@ -23,13 +23,12 @@ export default function ApplicationModal(props) {
     data.append("resume", resume);
 
     newApplication(data);
+    e.target.reset();
+    alert("Applied Succesfully");
   };
 
   const newApplication = (data) => {
-    console.log(data);
-    console.log(props.props.match.params.id);
     const { id } = props.props.match.params;
-    //this id may be needed to converted to number
     axios
       .post(`http://localhost:5000/application/${id}`, data)
       .then((response) => {

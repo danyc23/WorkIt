@@ -1,12 +1,13 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const jobApplication = async (req, res, next) => {
+const jobApplication = async (req, res) => {
   let postId = Number(req.params.id);
-  const resume = req.file;
-  console.log("body--->", req.body);
-  console.log("file--->", req.file);
-  const { name, lastname, email, salary, details, phone } = req.body;
+  const phone = parseInt(req.body.phone);
+  const salary = parseInt(req.body.salary);
+  const resume = req.file.buffer;
+  const lastname = req.body.lastName;
+  const { name, email, details } = req.body;
   if (
     !name ||
     !lastname ||
@@ -16,7 +17,7 @@ const jobApplication = async (req, res, next) => {
     !resume ||
     !phone
   ) {
-    res.status(401).json({ msg: "Please, fill all spaces" });
+    res.status(400).json({ msg: "Please, fill all spaces" });
   } else {
     await prisma.applicant
       .create({
