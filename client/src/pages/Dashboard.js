@@ -14,6 +14,7 @@ class Dashboard extends React.Component {
     location: "",
     description: "",
     posts: [],
+    page: "descforcompany",
   };
   componentDidMount = () => {
     this.getJobs(sessionStorage.getItem("userId"));
@@ -121,7 +122,7 @@ class Dashboard extends React.Component {
           </form>
         </section>
         <section>
-          <JobList jobs={this.state.posts} />
+          <JobList page={this.state.page} jobs={this.state.posts} />
         </section>
       </div>
     );

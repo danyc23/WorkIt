@@ -7,8 +7,9 @@ export default function Job(props) {
   let { location } = props;
   let { description } = props;
   let { date } = props;
+  let { page } = props;
   return (
-    <Link to={`/description/${id}`} className="job-container">
+    <Link to={`/${page}/${id}`} className="job-container">
       <h2 className="job-title">{title}</h2>
       <p className="job-location">{location}</p>
       <p className="job-description">{description}</p>

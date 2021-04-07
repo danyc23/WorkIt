@@ -9,6 +9,7 @@ export default function JobList(props) {
         jobs.map((job) => {
           return (
             <Job
+              page={props.page}
               key={job.id}
               id={job.id}
               title={job.title}

@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import JobDesc from "./pages/JobDesc";
+import JobInfoForCompany from "./pages/JobInfoForCompany";
 
 ReactDOM.render(
   <Router>
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/login" component={Login} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/description/:id" component={JobDesc} />
+      <Route path="/descforcompany/:id" component={JobInfoForCompany} />
     </Switch>
   </Router>,
 

@@ -5,6 +5,7 @@ import JobList from "./JobList";
 export default class JobsInDash extends Component {
   state = {
     posts: [],
+    page: "test",
   };
   componentDidMount = () => {
     this.getJobs(sessionStorage.getItem("userId"));
@@ -27,7 +28,7 @@ export default class JobsInDash extends Component {
   render(props) {
     return (
       <div>
-        <JobList posts={this.state.posts} />
+        <JobList page={this.state.page} posts={this.state.posts} />
       </div>
     );
   }

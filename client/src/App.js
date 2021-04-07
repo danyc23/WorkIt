@@ -8,6 +8,7 @@ import JobList from "./components/JobList";
 class App extends React.Component {
   state = {
     allJobs: [],
+    page: "description",
   };
   componentDidMount() {
     this.getAllPosts();
@@ -31,7 +32,7 @@ class App extends React.Component {
       <>
         <Navbar />
         <SearchBar />
-        <JobList jobs={this.state.allJobs} />
+        <JobList page={this.state.page} jobs={this.state.allJobs} />
       </>
     );
   }
