@@ -458,6 +458,16 @@
   margin-top: 0;
 }
 
+.desc-info {
+  margin: 20px 16px;
+  padding: 10px 5px;
+  border: 1px solid black;
+}
+
+.desc-info__title {
+  margin-bottom: 5px;
+}
+
 * {
   margin: 0;
   padding: 0;
