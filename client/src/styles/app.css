@@ -464,8 +464,26 @@
   border: 1px solid black;
 }
 
+.desc-info__center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 600px;
+}
+
 .desc-info__title {
   margin-bottom: 5px;
+}
+
+.apply-btn {
+  background-color: #00233d;
+  color: white;
+  padding: 10px 20px;
+  margin: 0px 16px;
 }
 
 * {

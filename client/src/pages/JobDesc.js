@@ -29,10 +29,11 @@ class JobDesc extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="desc-info__center">
         <DescInfo info={this.state.allData} />
         {!sessionStorage.getItem("authToken") && (
           <button
+            className="apply-btn"
             onClick={(e) =>
               this.setState({ modalIsOpen: !this.state.modalIsOpen })
             }
