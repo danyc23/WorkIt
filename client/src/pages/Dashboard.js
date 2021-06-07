@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
     axios
       .get(`http://localhost:5000/company/${id}`)
       .then((response) => {
+        console.log(response);
         let companyPost = response.data.posts;
         console.log(companyPost);
         this.setState({

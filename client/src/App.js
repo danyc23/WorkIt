@@ -19,7 +19,7 @@ class App extends React.Component {
       .get("http://localhost:5000/post")
       .then((response) => {
         this.setState({
-          allJobs: response.data,
+          allJobs: response.data.reverse(),
         });
       })
       .catch((err) => {

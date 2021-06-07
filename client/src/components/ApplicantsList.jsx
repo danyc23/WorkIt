@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Applicant from "./Applicant";
 
 export default function ApplicantsList(props) {
