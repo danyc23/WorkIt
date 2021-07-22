@@ -76,7 +76,9 @@ export default function ApplicationModal(props) {
           />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button className="modal-btn" type="submit">
+            Submit
+          </button>
         </div>
       </div>
     </form>

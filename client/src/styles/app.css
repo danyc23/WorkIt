@@ -486,6 +486,10 @@
   margin: 0px 16px;
 }
 
+.applicant-container {
+  border-top: 1px solid black;
+}
+
 * {
   margin: 0;
   padding: 0;

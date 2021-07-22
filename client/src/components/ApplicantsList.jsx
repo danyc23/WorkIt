@@ -3,7 +3,7 @@ import Applicant from "./Applicant";
 
 export default function ApplicantsList(props) {
   const { applicants } = props;
-  console.log(applicants.lastname);
+  console.log(props);
   return (
     applicants &&
     applicants.map((person) => {
